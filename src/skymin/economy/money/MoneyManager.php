@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace skymin\economy\money;
 
+use skymin\economy\Loader;
 use skymin\economy\money\command\MoneyCommand;
 use skymin\economy\money\task\AsyncUpdateRank;
 
@@ -29,7 +30,7 @@ final class MoneyManager{
 		self::setInstance($this);
 	}
 	
-	public function init(Plugin $plugin) : void{
+	public function init(Loader $plugin) : void{
 		if($this->register === null){
 			$this->register = $plugin;
 		}

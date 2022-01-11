@@ -8,4 +8,6 @@ projects:
     libs:
       - src: sky-min/CommandLib/CommandLib
         version: ^1.4.0
+      - src: sky-min/InventoryLib/InventoryLib
+        version: ^2.4.7
 ...

@@ -31,7 +31,7 @@ final class PayMoney implements Form{
 		$data[0] = $this->players[$data[0]];
 		$money = (int) $data[1];
 		if($money < 1){
-			$this->msg($player, '금액은 양수로 입력해주세요.')
+			$this->msg($player, '금액은 양수로 입력해주세요.');
 			return;
 		}
 		$manager = MoneyManager::getInstance();

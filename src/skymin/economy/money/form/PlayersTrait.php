@@ -11,7 +11,7 @@ use function array_keys;
 
 trait PlayerTrait{
 	
-	private array $players
+	private array $players;
 	
 	public function __construct(){
 		$this->players = array_keys(MoneyManager::getInstance()->db['players']);

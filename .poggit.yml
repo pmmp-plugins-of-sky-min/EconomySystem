@@ -13,5 +13,4 @@ projects:
       - src: sky-min/InventoryLib/InventoryLib
         version: ^2.4.7
       - src: https://poggit.pmmp.io/ci/sky-min/DataConfig
-        version: ^1.0.1
 ...

@@ -13,5 +13,5 @@ projects:
       - src: sky-min/InventoryLib/InventoryLib
         version: ^2.4.7
       - src: sky-min/DataConfig/DataConfig
-        version: ^1.0.0
+        version: ^1.0.1
 ...

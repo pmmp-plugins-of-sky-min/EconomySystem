@@ -37,7 +37,6 @@ final class MoneyCommand extends BaseCommand{
 		$this->addParameter(EnumFactory::create('플레이어', EnumType::STRING()), 3);
 		$this->addParameter(EnumFactory::create('돈', EnumType::INT()), 3);
 		$this->addParameter(EnumFactory::create('돈', '순위', ['순위']), 4);
-		$this->addParameter(EnumFactory::create('돈', '돈', ['']), 3);
 		$this->update();
 	}
 	

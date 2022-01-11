@@ -8,6 +8,4 @@ projects:
     libs:
       - src: sky-min/DataConfig/DataConfig
         version: ^1.0.0
-      - src: sky-min/CommandLib/CommandLib
-        version: ^1.4.0
 ...

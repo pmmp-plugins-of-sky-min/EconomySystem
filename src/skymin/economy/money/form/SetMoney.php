@@ -40,7 +40,7 @@ final class SetMoney implements Form{
 			return;
 		}
 		$manager->setMoney($data[0], $money, true);
-		$this->msg($player, '성공적으로 ' . $manager->format($money) . '(을)를 설정하였습니다.');
+		$this->msg($player, '성공적으로 ' . $manager->format($money) . '(으)로 설정하였습니다.');
 	}
 	
 }

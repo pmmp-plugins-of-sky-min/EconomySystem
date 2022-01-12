@@ -37,6 +37,7 @@ final class MoneyCommand extends BaseCommand{
 		$this->addParameter(EnumFactory::create('플레이어', EnumType::STRING()), 3);
 		$this->addParameter(EnumFactory::create('돈', EnumType::INT()), 3);
 		$this->addParameter(EnumFactory::create('돈', '순위', ['순위']), 4);
+		$this->addParameter(EnumFactory::create('돈', '돈', ['']), 3);
 		$this->update();
 	}
 	
@@ -54,6 +55,8 @@ final class MoneyCommand extends BaseCommand{
 	}
 	
 	public function execute(CommandSender $sender, string $commandLabel, array $args) : void{
+		$manager = $this->manager;
+		$manager->updateRank();
 		if(!isset($args[0]) || !in_array($args[0], self::CMDS)){
 			if($sender->getName() !== 'CONSOLE'){
 				$sender->sendForm(new Main($sender));
@@ -66,7 +69,6 @@ final class MoneyCommand extends BaseCommand{
 			}
 			return;
 		}
-		$manager = $this->manager;
 		$subcmd = $args[0];
 		if($subcmd === self::CMDS[0]){
 			if(!isset($args[1]) || !isset($args[2]) || !is_numeric($args[2])){
@@ -118,7 +120,7 @@ final class MoneyCommand extends BaseCommand{
 			return;
 		}
 		if($subcmd === self::CMDS[3]){
-			if(!$sender instanceof Player) return;
+			if($sender->getName() === 'CONSOLE') return;
 			if(!isset($args[1]) || !isset($args[2]) || !is_numeric($args[2])){
 				$sender->sendMessage('/돈 지불 [플레이어] [돈]');
 				return;
@@ -142,13 +144,13 @@ final class MoneyCommand extends BaseCommand{
 			}
 			$manager->addMoney($args[1], $money);
 			$manager->reduceMoney($name, $money);
-			$format = $manager->format($momey);
+			$format = $manager->format($money);
 			$manager->msg($args[1], $name . '님께' . $format . '(을)를 받았습니다.');
 			$manager->msg($sender, $args[1] . '님께' . $format . '(을)를 지불하였습니다.');
 			return;
 		}
 		if($subcmd === self::CMDS[4]){
-			if(!$sender instanceof Player){
+			if($sender->getName() !== 'CONSOLE'){
 				$sender->sendForm(new MoneyRank());
 			}
 		}

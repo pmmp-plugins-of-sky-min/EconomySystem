@@ -17,7 +17,7 @@ final class AddMoney implements Form{
 			'title' => '돈 지급',
 			'content' => [
 				['type' => 'dropdown',  'text' => '플레이어를 선택하세요.', 'options' => $this->players],
-				['type' => 'input', '금액을 입력하세요.']
+				['type' => 'input', 'text' => '금액을 입력하세요.']
 			]
 		];
 	}

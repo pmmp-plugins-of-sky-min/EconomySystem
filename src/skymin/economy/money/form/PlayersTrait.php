@@ -9,12 +9,12 @@ use pocketmine\player\Player;
 
 use function array_keys;
 
-trait PlayerTrait{
+trait PlayersTrait{
 	
 	private array $players;
 	
 	public function __construct(){
-		$this->players = array_keys(MoneyManager::getInstance()->db['players']);
+		$this->players = array_keys(MoneyManager::getInstance()->data['players']);
 	}
 	
 	private function msg(Player $player, string $msg) : void{

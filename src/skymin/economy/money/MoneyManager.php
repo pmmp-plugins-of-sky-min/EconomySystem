@@ -15,14 +15,14 @@ use pocketmine\player\Player;
 use pocketmine\event\EventPriority;
 use pocketmine\event\player\PlayerJoinEvent;
 
-use skymin\config\Data;
+use skymin\data\Data;
 use skymin\CommandLib\CmdManager;
 
 final class MoneyManager{
 	use SingletonTrait;
 	
 	public static string $prefix = '';
-	public ?Plugin $register = null;
+	public ?Loader $register = null;
 	public array $data = [];
 	public array $rank = [];
 	

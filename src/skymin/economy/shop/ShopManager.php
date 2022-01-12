@@ -44,7 +44,7 @@ final class ShopManager{
 		foreach($this->data['shop'] as $name => $items){
 			$shops[$name] = new Shop($name, $items);
 		}
-		$this->shops = $shops
+		$this->shops = $shops;
 		EntityFactory::getInstance()->register(ShopNpc::class, function(World $world, CompoundTag $nbt) : ShopNpc{
 			return new ShopNpc(EntityDataHelper::parseLocation($nbt, $world), ShopNpc::parseSkinNBT($nbt), $nbt);
 		}, ['ShopNpc']);

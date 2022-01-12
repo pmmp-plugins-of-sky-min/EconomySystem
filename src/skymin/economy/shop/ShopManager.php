@@ -76,7 +76,7 @@ final class ShopManager{
 	}
 	
 	public function addShop(Shop $shop) : void{
-		if(!isset($shop->getName())){
+		if(!isset($this->shops[$shop->getName()])){
 			$this->shops[$shop->getName()] = $shop;
 		}
 	}

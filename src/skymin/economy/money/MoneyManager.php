@@ -119,7 +119,7 @@ final class MoneyManager{
 		if(!$this->isData($name)) return;
 		$this->data['players'][$name] += $money;
 		if($msg){
-			$this->msg($player, $this->format($money), '지급되었습니다. ');
+			$this->msg($player, $this->format($money) . ' 지급되었습니다. ');
 		}
 	}
 	
@@ -128,7 +128,7 @@ final class MoneyManager{
 		if(!$this->isData($name)) return;
 		$this->data['players'][$name] -= $money;
 		if($msg){
-			$this->msg($player, $this->format($money) . '감소되었습니다.');
+			$this->msg($player, $this->format($money) . ' 감소되었습니다.');
 		}
 	}
 	

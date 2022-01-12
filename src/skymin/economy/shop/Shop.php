@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace skymi\economy\shop;
+namespace skymin\economy\shop;
 
 final class Shop{
 	

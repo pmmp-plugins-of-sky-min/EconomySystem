@@ -39,7 +39,7 @@ final class ShopManager{
 		$this->data = Data::call($plugin->getDataFolder() . 'shop/Config.json', Data::JSON, [
 			'npc' => [],
 			'shop' => []
-		])
+		]);
 		$shops = [];
 		foreach($this->data['shop'] as $name => $items){
 			$shops[$name] = new Shop($name, $items);

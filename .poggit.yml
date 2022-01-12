@@ -5,8 +5,6 @@ branches:
 projects:
   EconomySystem:
     path: ""
-    lint:
-      phpstan: false
     libs:
       - src: sky-min/CommandLib/CommandLib
         version: ^1.4.0

@@ -45,8 +45,8 @@ final class PayMoney implements Form{
 		}
 		$manager->addMoney($data[0], $money);
 		$manager->reduceMoney($player, $money);
-		$manager->msg($data[0], $player->getName() . '님께' . $manager->format($money) . '(을)를 받았습니다.');
-		$this->msg($player, $data[0] . '님 께' . $manager->format($money) . '(을)를 지불하였습니다.');
+		$manager->msg($data[0], $player->getName() . '님께 ' . $manager->format($money) . '(을)를 받았습니다.');
+		$this->msg($player, $data[0] . '님 께 ' . $manager->format($money) . '(을)를 지불하였습니다.');
 	}
 	
 }

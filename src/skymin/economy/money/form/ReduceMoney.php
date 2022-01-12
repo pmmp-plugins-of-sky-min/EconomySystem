@@ -36,7 +36,7 @@ final class ReduceMoney implements Form{
 			return;
 		}
 		if($manager->getMoney($data[0]) < $money){
-			$this->msg($playere, '플레이어 소지 금액보다 많습니다.');
+			$this->msg($player, '플레이어 소지 금액보다 많습니다.');
 		}
 		$manager->reduceMoney($data[0], $money, true);
 		$this->msg($player, '성공적으로 ' . $manager->format($money) . '(을)를 뺏었습니다.');

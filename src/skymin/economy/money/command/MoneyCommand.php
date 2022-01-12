@@ -145,8 +145,8 @@ final class MoneyCommand extends BaseCommand{
 			$manager->addMoney($args[1], $money);
 			$manager->reduceMoney($name, $money);
 			$format = $manager->format($money);
-			$manager->msg($args[1], $name . '님께' . $format . '(을)를 받았습니다.');
-			$manager->msg($sender, $args[1] . '님께' . $format . '(을)를 지불하였습니다.');
+			$manager->msg($args[1], $name . '님께 ' . $format . '(을)를 받았습니다.');
+			$manager->msg($sender, $args[1] . '님께 ' . $format . '(을)를 지불하였습니다.');
 			return;
 		}
 		if($subcmd === self::CMDS[4]){

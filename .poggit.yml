@@ -13,5 +13,5 @@ projects:
       - src: sky-min/Data/Data
         version: ^1.0.0
       - src: sky-min/SkinTool/SkinTool
-        version: ^3.0.1
+        version: 3.0.1
 ...

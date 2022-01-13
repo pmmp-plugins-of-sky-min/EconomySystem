@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace skymin\economy;
 
+use skymin\economy\shop\ShopManager;
 use skymin\economy\money\MoneyManager;
 
 use pocketmine\plugin\PluginBase;
@@ -16,6 +17,7 @@ final class Loader extends PluginBase{
 		CmdManager::register($this);
 		InvLibManager::register($this);
 		MoneyManager::getInstance()->init($this);
+		ShopManager::getInstance()->init($this);
 	}
 	
 	public function onDisable() : void{

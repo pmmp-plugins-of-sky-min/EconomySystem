@@ -21,8 +21,8 @@ final class Shop{
 	}
 	
 	private array $data = [
-		'items' = [],
-		'prices' = []
+		'items' => [],
+		'prices' => []
 	];
 	
 	public function __construct(private string $name){}

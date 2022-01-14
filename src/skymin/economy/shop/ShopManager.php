@@ -8,7 +8,6 @@ use skymin\economy\shop\entity\ShopNpc;
 use skymin\economy\shop\command\ShopCommand;
 use pocketmine\utils\SingletonTrait;
 use pocketmine\world\World;
-use pocketmine\entity\Skin;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\event\EventPriority;
 use pocketmine\event\server\DataPacketReceiveEvent;

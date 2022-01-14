@@ -5,9 +5,10 @@ namespace skymin\economy\shop;
 
 use skymin\economy\Loader;
 use skymin\economy\shop\entity\ShopNpc;
-
+use skymin\economy\shop\command\ShopCommand;
 use pocketmine\utils\SingletonTrait;
 use pocketmine\world\World;
+use pocketmine\entity\Skin;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\event\EventPriority;
 use pocketmine\event\server\DataPacketReceiveEvent;
@@ -48,16 +49,20 @@ final class ShopManager{
 		EntityFactory::getInstance()->register(ShopNpc::class, function(World $world, CompoundTag $nbt) : ShopNpc{
 			return new ShopNpc(EntityDataHelper::parseLocation($nbt, $world), ShopNpc::parseSkinNBT($nbt), $nbt);
 		}, ['ShopNpc']);
+		$plugin->getServer()->getCommandMap()->register('shop', new ShopCommand());
 		$plugin->getServer()->getPluginManager()->registerEvent(DataPacketReceiveEvent::class, function(DataPacketReceiveEvent$ev) : void{
 			$player = $ev->getOrigin()->getPlayer();
 			$packet = $ev->getPacket();
 			if($player === null) return;
 			if($packet instanceof InventoryTransactionPacket && $packet->trData instanceof UseItemOnEntityTransactionData){
-				if($player->hasPermission('economy.op') && $player->isSneaking()){
-					$entity->close();
-					return;
+				$entity = $player->getWorld()->getEntity($packet->trData->getActorRuntimeId());
+				if($entity instanceof ShopNpc){
+					if($player->hasPermission('economy.op') && $player->isSneaking()){
+						$entity->close();
+						return;
+					}
+					//openshop
 				}
-				//openshop
 			}
 		}, EventPriority::HIGHEST, $plugin);
 	}
@@ -110,8 +115,17 @@ final class ShopManager{
 		}
 	}
 	
-	public function spawnNpc(string $npcName, Location $pos, SkinTool $image, string|ModelTool $model = '') : void{
-		
+	public function spawnNpc(string $npcName, Location $pos, string $skinId, string|ImageTool $image, ?ModelTool $model = null) : void{
+		$skin = new Skin(
+			$skinId,
+			$image instanceof SkinTool ? $image->getSkinData : $image,
+			$model === null ? '' : $model->getName(),
+			$model === null ? '' : $model->getJson()
+		);
+		$nbt = CompoundTag::create()
+			->setString('CustomName', $npcName)
+			->setString('shop', $this->data['npc'][$npcName]['shop']);
+		(new ShopNpc($pos, $skin, $nbt))->spawnToAll();
 	}
 	
 }

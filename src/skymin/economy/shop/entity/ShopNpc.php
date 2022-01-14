@@ -11,10 +11,12 @@ use pocketmine\event\entity\EntityDamageEvent;
 final class ShopNpc extends Human{
 	
 	private string $name;
+	private string $msg;
 	
 	protected function init(CompoundTag $nbt) : void{
 		parent::initEntity($nbt);
 		$this->name = $name = $nbt->getString('shop');
+		$this->name = $name = $nbt->getString('msg');
 		$this->setNameTagVisible(true);
 		$this->setNameTagAlwaysVisible(true);
 	}
@@ -22,6 +24,7 @@ final class ShopNpc extends Human{
 	public function saveNBT() : CompoundTag{
 		$nbt = parent::saveNBT();
 		$nbt->setString('shop', $this->name);
+		$nbt->setString('msg', $this->msg);
 		return $nbt;
 	}
 	

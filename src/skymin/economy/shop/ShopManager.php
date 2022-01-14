@@ -36,10 +36,7 @@ final class ShopManager{
 		if($this->register === null){
 			$this->register = $plugin;
 		}
-		$this->data = Data::call($plugin->getDataFolder() . 'shop/Config.json', Data::JSON, [
-			'npc' => [],
-			'shop' => []
-		]);
+		$this->data = Data::call($plugin->getDataFolder() . 'shop/Config.json', Data::JSON, ['shop' => []]);
 		$shops = [];
 		foreach($this->data['shop'] as $name => $items){
 			$shops[$name] = new Shop($name, $items);
@@ -91,30 +88,7 @@ final class ShopManager{
 		}
 	}
 	
-	public function getNpcNames() : array{
-		return array_keys($this->data['npc']);
-	}
-	
-	public function getNpcData(string $npcName) : ?array{
-		return $this->data['npc'][$npcName] ?? null;
-	}
-	
-	public function setNpcData(string $shopName, string $npcName, string $closemsg, string $buymsg) : void{
-		if(!isset($this->shops[$shopName])) return;
-		$this->data['npc'][$npcName] = [
-			'shop' => $shopName,
-			'close' => $closemsg,
-			'buy' => $buymsg
-		];
-	}
-	
-	public function deleteNpcData(string $name) : void{
-		if(isset($this->data['npc'][$name])){
-			unset($this->data['npc'][$name]);
-		}
-	}
-	
-	public function spawnNpc(string $npcName, Location $pos, string $skinId, string|ImageTool $image, ?ModelTool $model = null) : void{
+	public function spawnNpc(string $shop, Location $pos, string $skinId, string|ImageTool $image, ?ModelTool $model = null, ?string $npcName = null, string $closemsg = '') : void{
 		$skin = new Skin(
 			$skinId,
 			$image instanceof ImageTool ? $image->getSkinData() : $image,
@@ -122,8 +96,9 @@ final class ShopManager{
 			$model === null ? '' : $model->getJson()
 		);
 		$nbt = CompoundTag::create()
-			->setString('CustomName', $npcName)
-			->setString('shop', $this->data['npc'][$npcName]['shop']);
+			->setString('CustomName', $npcName ?? $shop)
+			->setString('shop', $shop);
+			->setString('msg', $closemsg);
 		(new ShopNpc($pos, $skin, $nbt))->spawnToAll();
 	}
 	

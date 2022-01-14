@@ -41,8 +41,8 @@ final class ShopManager{
 			'shop' => []
 		]);
 		$shops = [];
-		foreach($this->data['shop'] as $name => $items){
-			$shops[$name] = new Shop($name, $items);
+		foreach($this->data['shop'] as $name => $data){
+			$shops[$name] = new Shop($name);
 		}
 		$this->shops = $shops;
 		EntityFactory::getInstance()->register(ShopNpc::class, function(World $world, CompoundTag $nbt) : ShopNpc{

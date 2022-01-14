@@ -117,7 +117,7 @@ final class ShopManager{
 	public function spawnNpc(string $npcName, Location $pos, string $skinId, string|ImageTool $image, ?ModelTool $model = null) : void{
 		$skin = new Skin(
 			$skinId,
-			$image instanceof ImageTool ? $image->getSkinData : $image,
+			$image instanceof ImageTool ? $image->getSkinData() : $image,
 			$model === null ? '' : $model->getName(),
 			$model === null ? '' : $model->getJson()
 		);

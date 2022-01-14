@@ -53,7 +53,7 @@ final class Shop{
 	
 	public function getItem(int $page, int $slot) : ?Item{
 		if(isset($this->data['items'][$page][$slot])){
-			return self::hashToitem($this->data['items'][$page][$slot]));
+			return self::hashToitem($this->data['items'][$page][$slot]);
 		}
 		return null;
 	}

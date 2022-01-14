@@ -16,7 +16,7 @@ final class ShopNpc extends Human{
 	protected function init(CompoundTag $nbt) : void{
 		parent::initEntity($nbt);
 		$this->name = $name = $nbt->getString('shop');
-		$this->name = $name = $nbt->getString('msg');
+		$this->msg = $name = $nbt->getString('msg');
 		$this->setNameTagVisible(true);
 		$this->setNameTagAlwaysVisible(true);
 	}

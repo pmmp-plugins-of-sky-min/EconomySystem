@@ -12,7 +12,7 @@ use function base64_decode;
 final class Shop{
 	
 	private static function itemTohash(Item $item) : string{
-		return $item->getId() . ':' . $item->getMeta() . ':' . base64_encode($item->getCompoundTag());
+		return $item->getId() . ':' . $item->getMeta() . ':' . base64_encode($item->getNamedTag()());
 	}
 	
 	private static function hashToitem(string $hash) : Item{

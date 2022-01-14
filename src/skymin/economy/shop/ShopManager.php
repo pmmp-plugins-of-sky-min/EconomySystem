@@ -70,7 +70,7 @@ final class ShopManager{
 	public function save() : void{
 		$shops = [];
 		foreach($this->shops as $name => $shop){
-			$shop[$name] = $shop->getAll();
+			$shops[$name] = $shop->getAll();
 		}
 		$this->data['shop'] = $shops;
 		Data::save($this->register->getDataFolder() . 'shop/Config.json', $this->data, Data::JSON);

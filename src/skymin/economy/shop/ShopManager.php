@@ -13,7 +13,7 @@ use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\event\EventPriority;
 use pocketmine\event\server\DataPacketReceiveEvent;
 use pocketmine\network\mcpe\protocol\InventoryTransactionPacket;
-use pocketmine\entity\{Location, EntityFactory, EntityDataHelper};
+use pocketmine\entity\{Skin, Location, EntityFactory, EntityDataHelper};
 use pocketmine\network\mcpe\protocol\types\inventory\UseItemOnEntityTransactionData;
 
 use skymin\data\Data;
@@ -100,7 +100,7 @@ final class ShopManager{
 		return $this->data['npc'][$npcName] ?? null;
 	}
 	
-	public function setNpcData(string $shopName, tring $npcName, string $closemsg, string $buymsg) : void{
+	public function setNpcData(string $shopName, string $npcName, string $closemsg, string $buymsg) : void{
 		if(!isset($this->shops[$shopName])) return;
 		$this->data['npc'][$npcName] = [
 			'shop' => $shopName,
@@ -118,7 +118,7 @@ final class ShopManager{
 	public function spawnNpc(string $npcName, Location $pos, string $skinId, string|ImageTool $image, ?ModelTool $model = null) : void{
 		$skin = new Skin(
 			$skinId,
-			$image instanceof SkinTool ? $image->getSkinData : $image,
+			$image instanceof ImageTool ? $image->getSkinData : $image,
 			$model === null ? '' : $model->getName(),
 			$model === null ? '' : $model->getJson()
 		);

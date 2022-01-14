@@ -30,7 +30,7 @@ final class ShopNpc extends Human{
 	}
 	
 	public function attack(EntityDamageEvent $source): void{
-		$source->setCancelled(true);
+		$source->cancel();
 	}
 	
 }

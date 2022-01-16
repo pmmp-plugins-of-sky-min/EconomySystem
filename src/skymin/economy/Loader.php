@@ -13,14 +13,14 @@ use skymin\CommandLib\CmdManager;
 
 final class Loader extends PluginBase{
 	
-	public function onEnable() : void{
+	protected function onEnable() : void{
 		CmdManager::register($this);
 		InvLibManager::register($this);
 		MoneyManager::getInstance()->init($this);
 		ShopManager::getInstance()->init($this);
 	}
 	
-	public function onDisable() : void{
+	protected function onDisable() : void{
 		MoneyManager::getInstance()->save();
 	}
 	

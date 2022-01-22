@@ -7,7 +7,7 @@ use skymin\economy\shop\Shop;
 
 use pocketmine\item\Item;
 use pocketmine\player\Player;
-use pocketmine\event\{Cancellable, CancellableTrait}; 
+use pocketmine\event\{Cancellable CancellableTrait}; 
 
 final class ShopSaleEvent extends ShopEvent implements Cancellable{
 	use CancellableTrait;

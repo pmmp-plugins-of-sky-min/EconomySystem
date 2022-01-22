@@ -9,7 +9,7 @@ use pocketmine\command\{Command, CommandSender};
 final class ShopCommand extends Command{
 	
 	public function __construct(){
-		parent::__construct('상점');
+		parent::__construct('상점설정');
 		$this->setPermission('economy.op');
 	}
 	

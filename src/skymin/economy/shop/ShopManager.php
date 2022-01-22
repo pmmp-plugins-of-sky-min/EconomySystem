@@ -36,12 +36,9 @@ final class ShopManager{
 		if($this->register === null){
 			$this->register = $plugin;
 		}
-		$this->data = Data::call($plugin->getDataFolder() . 'shop/Config.json', Data::JSON, [
-			'npc' => [],
-			'shop' => []
-		]);
+		$this->data = Data::call($plugin->getDataFolder() . 'shop/Config.json', Data::JSON, ['shop' => []]);
 		$shops = [];
-		foreach($this->data['shop'] as $name => $data){
+		foreach($this->data['shop'] as $name => $items){
 			$shops[$name] = new Shop($name);
 		}
 		$this->shops = $shops;
@@ -91,7 +88,7 @@ final class ShopManager{
 		}
 	}
 	
-	public function spawnNpc(string $shop, Location $pos, string $skinId, string|ImageTool $image, ?ModelTool $model = null, ?string $npcName = null, string $closemsg = '') : void{
+	public function spawnNpc(string $shop, Location $pos, string $skinId, string|ImageTool $image, ?ModelTool $model = null, ?string $npcName = null) : void{
 		$skin = new Skin(
 			$skinId,
 			$image instanceof ImageTool ? $image->getSkinData() : $image,
@@ -100,8 +97,7 @@ final class ShopManager{
 		);
 		$nbt = CompoundTag::create()
 			->setString('CustomName', $npcName ?? $shop)
-			->setString('shop', $shop)
-			->setString('msg', $closemsg);
+			->setString('shop', $shop);
 		(new ShopNpc($pos, $skin, $nbt))->spawnToAll();
 	}
 	

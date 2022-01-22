@@ -22,6 +22,7 @@ final class Loader extends PluginBase{
 	
 	protected function onDisable() : void{
 		MoneyManager::getInstance()->save();
+		ShopManager::getInstance()->save();
 	}
 	
 }

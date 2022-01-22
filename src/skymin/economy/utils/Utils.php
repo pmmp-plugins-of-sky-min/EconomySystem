@@ -28,7 +28,7 @@ final class Utils{
 	}
 	
 	public static function itemTohash(Item $item) : string{
-		return $item->getId() . ':' . $item->getMeta() . ':' . base64_encode($item->getNamedTag();
+		return $item->getId() . ':' . $item->getMeta() . ':' . base64_encode($item->getNamedTag());
 	}
 	
 	public static function hashToitem(string $hash) : Item{

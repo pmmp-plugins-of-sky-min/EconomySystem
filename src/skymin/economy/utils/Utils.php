@@ -23,7 +23,7 @@ final class Utils{
 		return strtolower($player instanceof Player ? $player->getName() : $player);
 	}
 	
-	public static function getPlayer(string|Player $player) ?Player{
+	public static function getPlayer(string|Player $player) : ?Player{
 		return $player instanceof Player ? $player : Server::getInstance()->getPlayerExact($player);
 	}
 	

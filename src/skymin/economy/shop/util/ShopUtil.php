@@ -27,7 +27,7 @@ final class ShopUtil{
 	public static function getItemCount(Inventory $inv, Item $item) : int{
 		$count = 0;
 		foreach($inv->all($item) as $slot => $i){
-			$count => $i->getCount();
+			$count += $i->getCount();
 		}
 		return $count;
 	}

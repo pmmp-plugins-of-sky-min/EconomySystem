@@ -11,7 +11,7 @@ use pocketmine\item\Item;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
-final class BuyForm implements Form{
+final class MenuForm implements Form{
 	
 	public function __construct(
 		private Player $player,

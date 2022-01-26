@@ -28,12 +28,10 @@ final class Loader extends PluginBase{
 		CmdManager::register($this);
 		InvLibManager::register($this);
 		MoneyManager::getInstance()->init($this);
-		ShopManager::getInstance()->init($this);
 	}
 	
 	protected function onDisable() : void{
 		MoneyManager::getInstance()->save();
-		ShopManager::getInstance()->save();
 	}
 	
 }

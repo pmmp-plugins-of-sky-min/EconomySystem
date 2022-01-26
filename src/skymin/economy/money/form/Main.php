@@ -27,7 +27,7 @@ final class Main implements Form{
 		return [
 			'type' => 'form',
 			'title' => MoneyManager::$prefix,
-			'content' => '§b내 돈: §r' . $manager->getMoney($player) . "\n§b순위: §r" . $manager->getRank($player) . "\n",
+			'content' => '§b내 돈: §r' . $manager->format($manager->getMoney($player)) . "\n§b순위: §r" . $manager->getRank($player) . "\n",
 			'buttons' => $buttons
 		];
 	}

@@ -6,6 +6,7 @@ namespace skymin\economy\money\command;
 use skymin\economy\money\MoneyManager;
 use skymin\economy\money\form\{Main, MoneyRank};
 
+use pocketmine\player\Player;
 use pocketmine\command\CommandSender;
 
 use skymin\CommandLib\{BaseCommand, EnumFactory, EnumType};
@@ -18,8 +19,6 @@ use function is_numeric;
 final class MoneyCommand extends BaseCommand{
 	
 	public const CMDS = ['지급', '뺏기', '설정', '지불', '순위'];
-	
-	public const CONSOLE = 'CONSOLE';
 	
 	public function __construct(private MoneyManager $manager){
 		parent::__construct('돈');
@@ -60,15 +59,15 @@ final class MoneyCommand extends BaseCommand{
 		$manager = $this->manager;
 		$manager->updateRank();
 		if(!isset($args[0]) || !in_array($args[0], self::CMDS)){
-			if($sender->getName() !== self::CONSOLE){
+			if($sender instanceof Player){
 				$sender->sendForm(new Main($sender));
-			}else{
-				$msg = "돈 지불 - 플레이어에게 돈을 지불합니다. \n돈 순위 - 돈 순위를 확인합니다.\n";
-				if($sender->hasPermission('economy.op')){
-					$msg .= "돈 지급 - 플레이어에게 돈을 지급합니다. \n돈 뺏기 - 플레이어의 돈을 뺏습니다. \n돈 설정 - 플레이어의 돈을 설정합니다. \n";
-				}
-				$sender->sendMessage($msg);
+				return;
 			}
+			$msg = "돈 지불 - 플레이어에게 돈을 지불합니다. \n돈 순위 - 돈 순위를 확인합니다.\n";
+			if($sender->hasPermission('economy.op')){
+				$msg .= "돈 지급 - 플레이어에게 돈을 지급합니다. \n돈 뺏기 - 플레이어의 돈을 뺏습니다. \n돈 설정 - 플레이어의 돈을 설정합니다. \n";
+			}
+			$sender->sendMessage($msg);
 			return;
 		}
 		$subcmd = $args[0];
@@ -122,7 +121,7 @@ final class MoneyCommand extends BaseCommand{
 			return;
 		}
 		if($subcmd === self::CMDS[3]){
-			if($sender->getName() === self::CONSOLE) return;
+			if(!$sender instanceof Player) return;
 			if(!isset($args[1]) || !isset($args[2]) || !is_numeric($args[2])){
 				$sender->sendMessage('/돈 지불 [플레이어] [돈]');
 				return;
@@ -152,7 +151,7 @@ final class MoneyCommand extends BaseCommand{
 			return;
 		}
 		if($subcmd === self::CMDS[4]){
-			if($sender->getName() !== self::CONSOLE){
+			if($sender instanceof Player){
 				$sender->sendForm(new MoneyRank());
 			}
 		}

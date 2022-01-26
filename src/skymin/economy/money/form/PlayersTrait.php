@@ -19,7 +19,7 @@ trait PlayersTrait{
 	}
 	
 	private function msg(Player $player, string $msg) : void{
-		$player->sendMessage(MoneyManager::$prefix . '§r ' . $msg);
+		$player->sendMessage(MoneyManager::$prefix . ' ' . $msg);
 	}
 	
 	private function form(Player $player, string $msg) : void{

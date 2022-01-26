@@ -24,19 +24,19 @@ final class AddMoney implements Form{
 	
 	public function handleResponse(Player $player, $data) : void{
 		if($data === null) return;
-		if(!isset($data[0]) || !isset($data[1]) || !is_numeric($data[1])){
-			$this->msg($player, '정확히 입력해 주세요.');
+		if(!isset($data[0]) || !isset($data[1])){
+			$this->form($player, '입력되지 않은 값이 있습니다.');
 			return;
 		}
 		$data[0] = $this->players[$data[0]];
-		$money = (int) $data[1];
+		$money = is_numeric($data[1]) ? (int) $data[1] : -1;
 		if($money < 1){
-			$this->msg($player, '금액은 양수로 입력해주세요.');
+			$this->form($player, '금액은 양수로 입력해주세요.');
 			return;
 		}
 		$manager = MoneyManager::getInstance();
 		if(!$manager->isData($data[0])){
-			$this->msg($player, '접속한적 없는 플레이어 입니다.');
+			$this->form($player, '접속한적 없는 플레이어 입니다.');
 			return;
 		}
 		$manager->addMoney($data[0], $money, true);

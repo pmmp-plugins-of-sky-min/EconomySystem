@@ -34,7 +34,7 @@ final class SettingForm implements Form{
 				return;
 			}
 			CheckManager::getInstance()->db->__set('item', $item);
-			$player->sendMessage('수표 아이템이 변경 되었습니다. ')
+			$player->sendMessage('수표 아이템이 변경 되었습니다. ');
 		}
 	}
 	

@@ -54,7 +54,7 @@ final class CheckManager{
 	public function create(int $amount) : false|Item{
 		if($amount < $this->db->__get('min-amount')) return false;
 		$item = Item::jsonDeserialize($this->db->__get('item'));
-		$nbt = $item->getCompoundTag();
+		$nbt = $item->getNamedTag();
 		$item = $item->setNamedTag($nbt->setInt('ccamount', $amount))
 			->setCustomName('§l§f[§d수표§f]§r §e' . MoneyManager::getInstance()->format($amount))
 			->setLore(['바닥을 터치하여 수표 금액 만큼 얻을 수 있다.']);

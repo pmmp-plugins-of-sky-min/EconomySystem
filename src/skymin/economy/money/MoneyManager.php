@@ -17,12 +17,16 @@ use pocketmine\event\EventPriority;
 use pocketmine\event\player\PlayerJoinEvent;
 
 use skymin\data\Data;
+use skymin\asyncqueue\AsyncQueue;
 use skymin\CommandLib\CmdManager;
 
 final class MoneyManager{
 	use SingletonTrait;
 	
 	public static string $prefix = '';
+	
+	private Data $db;
+	
 	public array $data = [];
 	public array $rank = [];
 	
@@ -31,7 +35,7 @@ final class MoneyManager{
 	}
 	
 	public function init(Loader $plugin) : void{
-		$this->data = Data::call(Loader::$datapath . 'Money/Config.json', Data::JSON, [
+		$this->db = new Data(Loader::$datapath . 'Money/Config.json', Data::JSON, [
 			'settings' => [
 				'unit' => '원',
 				'default' => 1000,
@@ -40,6 +44,7 @@ final class MoneyManager{
 			],
 			'players' => []
 		]);
+		$this->data = $this->db->data;
 		$this->updateRank();
 		self::$prefix = $this->data['settings']['prefix'] . '§r';
 		$server = $plugin->getServer();
@@ -61,7 +66,8 @@ final class MoneyManager{
 	}
 	
 	public function save() : void{
-		Data::save(Loader::$datapath . 'Money/Config.json', $this->data, Data::JSON);
+		$this->db->data = $this->data;
+		$this->db->save();
 	}
 	
 	public function msg(string|Player $player, string $msg) : void{
@@ -127,9 +133,9 @@ final class MoneyManager{
 		}
 	}
 	
-	public function updateRank() : void{
+	public function updateRank(?\Closure $callBack = null) : void{
 		$server = Server::getInstance();
-		$server->getAsyncPool()->submitTask(new AsyncUpdateRank($this->data['players'], $this->data['settings']['oprank'] ? [] : $server->getOps()->getAll()));
+		AsyncQueue::submit(new AsyncUpdateRank($this->data['players'], $this->data['settings']['oprank'] ? [] : $server->getOps()->getAll()), $callBack === null ? null : $callBack);
 	}
 	
 	public function getRank(string|Player $player) : int{

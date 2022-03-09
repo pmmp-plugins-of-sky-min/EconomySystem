@@ -7,6 +7,7 @@ use skymin\economy\money\MoneyManager;
 use skymin\economy\money\form\{Main, MoneyRank};
 
 use pocketmine\player\Player;
+use pocketmine\scheduler\AsyncTask;
 use pocketmine\command\CommandSender;
 
 use skymin\CommandLib\{BaseCommand, EnumFactory, EnumType};
@@ -57,7 +58,6 @@ final class MoneyCommand extends BaseCommand{
 	
 	public function execute(CommandSender $sender, string $commandLabel, array $args) : void{
 		$manager = $this->manager;
-		$manager->updateRank();
 		if(!isset($args[0]) || !in_array($args[0], self::CMDS)){
 			if($sender instanceof Player){
 				$sender->sendForm(new Main($sender));
@@ -152,7 +152,9 @@ final class MoneyCommand extends BaseCommand{
 		}
 		if($subcmd === self::CMDS[4]){
 			if($sender instanceof Player){
-				$sender->sendForm(new MoneyRank());
+				$manager->updateRank(function(AsyncTask $task) use($sender) : void{
+					$sender->sendForm(new MoneyRank());
+				});
 			}
 		}
 	}

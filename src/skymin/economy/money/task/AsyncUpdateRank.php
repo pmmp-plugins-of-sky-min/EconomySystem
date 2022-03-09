@@ -7,6 +7,8 @@ use skymin\economy\money\MoneyManager;
 
 use pocketmine\scheduler\AsyncTask;
 
+use skymin\asyncqueue\AsyncQueue;
+
 final class AsyncUpdateRank extends AsyncTask{
 	
 	public function __construct(private array $players, private array $ops){}
@@ -27,6 +29,7 @@ final class AsyncUpdateRank extends AsyncTask{
 	
 	public function onCompletion() : void{
 		MoneyManager::getInstance()->rank = $this->getResult();
+		AsyncQueue::callBack($this);
 	}
 	
 }

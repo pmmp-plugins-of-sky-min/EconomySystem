@@ -9,7 +9,7 @@ projects:
       - src: sky-min/CommandLib/CommandLib
         version: ^1.4.0
       - src: sky-min/DataConfig/Data
-        version: ^2.0.7
+        version: ^2.1.1
       - src: sky-min/AsyncQueue/AsyncQueue
-        version: ^1.0.1
+        version: ^1.0.2
 ...
